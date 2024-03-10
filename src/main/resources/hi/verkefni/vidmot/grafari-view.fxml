@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.shape.Rectangle?>
+
+<?import java.net.URL?>
 <fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="hi.verkefni.vidmot.GoldController">
-    <Rectangle fx:id="" width="100.0" height="50.0" style="-fx-fill: blue;" />
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <Rectangle fx:id="" width="100.0" height="50.0" styleClass="grafari" />
 </fx:root>

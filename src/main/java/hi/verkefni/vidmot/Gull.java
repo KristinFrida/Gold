@@ -2,7 +2,6 @@ package hi.verkefni.vidmot;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.shape.Rectangle;
-
 import java.io.IOException;
 import java.util.Random;
 
