@@ -46,16 +46,6 @@ public class Leikbord extends Pane {
         grafari.afram();
     }
 
-    public void borda() {
-        for (Gull g : gullList) {
-            if (grafari.erEtur(g)) {
-                goldController.getLeikur().vinningur();
-                getChildren().remove(g);
-                gullList.remove(g);
-                return;
-            }
-        }
-    }
 
     public void hreinsaBord() {
         hreinsaGrafara();

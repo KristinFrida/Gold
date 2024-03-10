@@ -1,42 +1,32 @@
 package hi.verkefni.vidmot;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
-import vinnsla.Leikur;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 
 
-
 public class GoldController {
-    // viðmótshlutir
-    @FXML
-    private ListView<Integer> fxStigin; //stigataflan
-    @FXML
-    private Leikbord leikbord;    // leiksvæðið
 
-    private Leikur leikur;  // vinnslan
 
-    private Timeline t;
-    public static final int INTERVAL = 100;
-    private static final int UPP = 90;
-    private static final int NIDUR = 270;
-    private static final int VINSTRI = 180;
-    private static final int HAEGRI = 360;
-
-    private static final HashMap<KeyCode, Integer> map = new HashMap<KeyCode, Integer>();
     private static GoldController instance;
+    @FXML
+    private Pane fxLeikbord;
+    private HashMap<KeyCode, Stefna> map = new HashMap<KeyCode, Stefna>();
+    @FXML
+    private Rectangle fxGrafari;
+    @FXML
+    private Label fxStefna;     // sýnir stefnuna
 
-    private MenuController menuStyringController;
 
-    private GoldController() {
-        // Private constructor to prevent instantiation
-    }
+
+
+
 
     public static GoldController getInstance() {
         if (instance == null) {
@@ -45,9 +35,10 @@ public class GoldController {
         return instance;
     }
 
-    public void setMenuStyringController(MenuController menuStyringController) {
-        this.menuStyringController = menuStyringController;
+    public void setStefna(int upp) {
+        fxStefna.setText(upp+"");
     }
+
 
     public void setDifficultyLevel(int difficultyLevel) {
         // Implement logic to store the selected difficulty level
@@ -55,34 +46,52 @@ public class GoldController {
         // Here, let's assume you have a method setDifficultyLevel in your GoldController
         // that accepts the selected difficulty level as a parameter.
         System.out.println("Stilla erfiðleikastigið: " + difficultyLevel);
-        // menuStyringController.setDifficultyLevel(difficultyLevel);
+        // goldController.setDifficultyLevel(difficultyLevel);
     }
-    /**
-     * Tengir örvatakka við fall sem á að keyra í controller
-     **/
-    public void orvatakkar() {
-        map.put(KeyCode.UP, UPP);   // setjum upp beina aðganginn frá örvatökkunum og í hornið
-        map.put(KeyCode.DOWN, NIDUR);
-        map.put(KeyCode.RIGHT, HAEGRI);
-        map.put(KeyCode.LEFT, VINSTRI);
+
+    private void orvatakkar(GoldController sc, Scene scene) {
+        // setjum upp beina aðganginn frá örvatökkunum og í hornið
+        map.put(KeyCode.UP, Stefna.UPP);
+        map.put(KeyCode.DOWN, Stefna.NIDUR);
+        map.put(KeyCode.RIGHT, Stefna.HAEGRI);
+        map.put(KeyCode.LEFT, Stefna.VINSTRI);
+
+        stefna(sc, scene);
+    }
+
+    private void stefna(GoldController sc, Scene scene){
+        scene.addEventFilter(KeyEvent.KEY_PRESSED,      //KeyEvents eru sendar á Scene
+                event -> {      // lambda fall - event er parameter
+                    // flettum upp horninu fyrir KeyCode í map
+                    sc.setStefna(map.get(event.getCode()).getGradur());
+                    System.out.println(fxStefna.getText());
+                    afram();
+                });
+    }
+
+
+    public void getOrvatakkar(GoldController sc, Scene scene){
+        orvatakkar(sc, scene);
+    }
+
+    private void afram(){
+        double X = fxGrafari.getX();
+        double Y = fxGrafari.getY();
+        double W = fxGrafari.getWidth();
+        double H = fxGrafari.getHeight();
+
+        String stefna = fxStefna.getText();
+        if (stefna.equals("90")) {
+            fxGrafari.setY(Y - H);
+        } else if (stefna.equals("180")) {
+            fxGrafari.setX(X - W);
+        } else if (stefna.equals("270")) {
+            fxGrafari.setY(Y + H);
+        } else if (stefna.equals("360")) {
+            fxGrafari.setX(X + W);
+        }
 
     }
-    public Leikur getLeikur() {
-        return leikur;
-    }
-    /**
-     * Setur upp Animation fyrir leikinn og setur upp leikjalykkjuna
-     */
-    public void hefjaLeik() {
-        KeyFrame k = new KeyFrame(Duration.millis(INTERVAL),
-                e -> {
-                    leikbord.borda();
-                    leikbord.afram();
-                });
-        t = new Timeline(k);
-        t.setCycleCount(Timeline.INDEFINITE);   // leikurinn leikur endalaust
-        leikbord.nyrLeikur(3);
-        t.play();
-    }
+
 
 }
