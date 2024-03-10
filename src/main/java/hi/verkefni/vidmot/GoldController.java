@@ -2,7 +2,6 @@ package hi.verkefni.vidmot;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -10,23 +9,20 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 
-
 public class GoldController {
 
-
     private static GoldController instance;
+
     @FXML
     private Pane fxLeikbord;
+
     private HashMap<KeyCode, Stefna> map = new HashMap<KeyCode, Stefna>();
+
     @FXML
     private Rectangle fxGrafari;
-    @FXML
-    private Label fxStefna;     // sýnir stefnuna
 
-
-
-
-
+    // Variable to store the direction
+    private int stefna;
 
     public static GoldController getInstance() {
         if (instance == null) {
@@ -36,21 +32,15 @@ public class GoldController {
     }
 
     public void setStefna(int upp) {
-        fxStefna.setText(upp+"");
+        // Assign the direction to the variable
+        this.stefna = upp;
     }
 
-
     public void setDifficultyLevel(int difficultyLevel) {
-        // Implement logic to store the selected difficulty level
-        // For example, you can store it in a variable or pass it to another method.
-        // Here, let's assume you have a method setDifficultyLevel in your GoldController
-        // that accepts the selected difficulty level as a parameter.
         System.out.println("Stilla erfiðleikastigið: " + difficultyLevel);
-        // goldController.setDifficultyLevel(difficultyLevel);
     }
 
     private void orvatakkar(GoldController sc, Scene scene) {
-        // setjum upp beina aðganginn frá örvatökkunum og í hornið
         map.put(KeyCode.UP, Stefna.UPP);
         map.put(KeyCode.DOWN, Stefna.NIDUR);
         map.put(KeyCode.RIGHT, Stefna.HAEGRI);
@@ -60,15 +50,13 @@ public class GoldController {
     }
 
     private void stefna(GoldController sc, Scene scene){
-        scene.addEventFilter(KeyEvent.KEY_PRESSED,      //KeyEvents eru sendar á Scene
-                event -> {      // lambda fall - event er parameter
-                    // flettum upp horninu fyrir KeyCode í map
+        scene.addEventFilter(KeyEvent.KEY_PRESSED,
+                event -> {
+                    // Update the direction using the variable
                     sc.setStefna(map.get(event.getCode()).getGradur());
-                    System.out.println(fxStefna.getText());
                     afram();
                 });
     }
-
 
     public void getOrvatakkar(GoldController sc, Scene scene){
         orvatakkar(sc, scene);
@@ -80,18 +68,15 @@ public class GoldController {
         double W = fxGrafari.getWidth();
         double H = fxGrafari.getHeight();
 
-        String stefna = fxStefna.getText();
-        if (stefna.equals("90")) {
+        // Use the stored direction from the variable
+        if (stefna == 90) {
             fxGrafari.setY(Y - H);
-        } else if (stefna.equals("180")) {
+        } else if (stefna == 180) {
             fxGrafari.setX(X - W);
-        } else if (stefna.equals("270")) {
+        } else if (stefna == 270) {
             fxGrafari.setY(Y + H);
-        } else if (stefna.equals("360")) {
+        } else if (stefna == 360) {
             fxGrafari.setX(X + W);
         }
-
     }
-
-
 }
