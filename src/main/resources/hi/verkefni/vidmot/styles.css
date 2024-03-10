@@ -1,3 +1,6 @@
+.grafari{
+    -fx-fill: blue;
+}
 .leikbordPane {
-    -fx-layout-y: 50;
+    -fx-background-color: saddlebrown;
 }
