@@ -14,7 +14,7 @@ public class GoldApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         GoldController sc = fxmlLoader.getController();
         sc.getOrvatakkar(sc, scene);
-        stage.setTitle("Gold Rush Game");
+        stage.setTitle("GOLD RUSH");
         stage.setScene(scene);
         stage.show();
 
