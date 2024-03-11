@@ -12,7 +12,7 @@
         <Menu mnemonicParsing="false" text="Skrá">
             <items>
                 <MenuItem mnemonicParsing="false" text="Byrja" onAction="#onNyrLeikur" />
-                <MenuItem mnemonicParsing="false" text="Hætta" />
+                <MenuItem mnemonicParsing="false" text="Hætta" onAction="#onHaettaLeik"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Breyta">

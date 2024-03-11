@@ -30,12 +30,11 @@ public class GoldController {
     @FXML
     private Rectangle fxGrafari;
 
-    Klukka klukka =new Klukka(60);
+    Klukka klukka = new Klukka(10);
     Leikur leikur;
 
 
-
-    private static MenuController menuController =new MenuController();
+    private static MenuController menuController = new MenuController();
 
     boolean Igangi = false;
 
@@ -49,14 +48,15 @@ public class GoldController {
         }
         return instance;
     }
-    public void initialize(){
-        leikur =new Leikur();
+
+    public void initialize() {
+        leikur = new Leikur();
         //fxLeikbord.setLeikur(leikur);
 
         fxLeikbord.requestFocus();
-        if (menuController != null){
+        if (menuController != null) {
             menuController.setController(this);
-        } else{
+        } else {
             System.err.println("menuController is null");
         }
         //fxStig.textProperty().bind(leikur.stiginProperty().asString());
@@ -81,7 +81,7 @@ public class GoldController {
         stefna(sc, scene);
     }
 
-    private void stefna(GoldController sc, Scene scene){
+    private void stefna(GoldController sc, Scene scene) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
                     // Update the direction using the variable
@@ -90,17 +90,17 @@ public class GoldController {
                 });
     }
 
-    public void getOrvatakkar(GoldController sc, Scene scene){
+    public void getOrvatakkar(GoldController sc, Scene scene) {
         orvatakkar(sc, scene);
     }
 
-    private void afram(){
+    private void afram() {
         double X = fxGrafari.getX();
         double Y = fxGrafari.getY();
         double W = fxGrafari.getWidth();
         double H = fxGrafari.getHeight();
 
-        if(Igangi) {
+        if (Igangi) {
             if (stefna == 90) {
                 fxGrafari.setY(Y - H);
             } else if (stefna == 180) {
@@ -114,12 +114,22 @@ public class GoldController {
     }
 
     public void hefjaLeik() {
-        Igangi= true;
+        Igangi = true;
 
     }
 
     public void raesaKlukku() {
         System.out.println("Initial Time: " + klukka.getTimi());
         klukka.tic();
+        if (klukka.getTimi() == 0) {
+            Igangi = false;
+            System.out.println("Time is up. Game over!");
+        }
+    }
+
+    public void onHaetta(){
+        Igangi=false;
+        klukka.stop();
     }
 }
+

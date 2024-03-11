@@ -26,4 +26,10 @@ public class MenuController {
         goldController.hefjaLeik();
         goldController.raesaKlukku();
     }
+
+    public void onHaettaLeik(ActionEvent actionEvent) {
+        goldController.onHaetta();
+    }
+
+
 }
