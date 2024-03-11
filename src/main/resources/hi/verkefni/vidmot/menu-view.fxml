@@ -11,8 +11,8 @@
     <menus>
         <Menu mnemonicParsing="false" text="Skrá">
             <items>
-                <MenuItem mnemonicParsing="false" text="Byrja" onAction="#onByrjaSelected" />
-                <MenuItem mnemonicParsing="false" text="Hætta" onAction="#onHaettaSelected" />
+                <MenuItem mnemonicParsing="false" text="Byrja" onAction="#onNyrLeikur" />
+                <MenuItem mnemonicParsing="false" text="Hætta" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Breyta">

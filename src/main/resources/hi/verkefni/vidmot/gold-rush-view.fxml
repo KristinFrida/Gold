@@ -13,6 +13,6 @@
          <Rectangle fx:id="fxGrafari" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="40.0" x="100.0" y="100.0" />
       </children>
    </Leikbord>
-   <Label fx:id="fjoldiStiga" layoutX="14.0" layoutY="450.0" prefWidth="67.0" prefHeight="17.0" text="Stigin:" />
-   <Label fx:id="timiEftir" layoutX="416.0" layoutY="450.0" prefWidth="67.0" prefHeight="17.0" text="Tími eftir:" />
+   <Label fx:id="fxStig" layoutX="14.0" layoutY="450.0" prefWidth="67.0" prefHeight="17.0" text="Stigin:" />
+   <Label fx:id="fxTimiEftir" layoutX="416.0" layoutY="450.0" prefWidth="67.0" prefHeight="17.0" text="Tími eftir:" />
 </Pane>

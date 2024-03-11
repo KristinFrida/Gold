@@ -2,10 +2,13 @@ package hi.verkefni.vidmot;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import vinnsla.Klukka;
+import vinnsla.Leikur;
 
 import java.util.HashMap;
 
@@ -16,10 +19,26 @@ public class GoldController {
     @FXML
     private Pane fxLeikbord;
 
+    @FXML
+    private Label fxStig;
+
+    @FXML
+    private Label fxTimiEftir;
+
     private HashMap<KeyCode, Stefna> map = new HashMap<KeyCode, Stefna>();
 
     @FXML
     private Rectangle fxGrafari;
+
+    Klukka klukka;
+    Leikur leikur;
+
+
+
+    private static MenuController menuController =new MenuController();
+
+    boolean Igangi = false;
+
 
     // Variable to store the direction
     private int stefna;
@@ -29,6 +48,19 @@ public class GoldController {
             instance = new GoldController();
         }
         return instance;
+    }
+    public void initialize(){
+        leikur =new Leikur();
+        //fxLeikbord.setLeikur(leikur);
+
+        fxLeikbord.requestFocus();
+        if (menuController != null){
+            menuController.setController(this);
+        } else{
+            System.err.println("menuController is null");
+        }
+        //fxStig.textProperty().bind(leikur.stiginProperty().asString());
+        //fxTimiEftir.textProperty().bind(klukka.timiProperty());
     }
 
     public void setStefna(int upp) {
@@ -68,15 +100,24 @@ public class GoldController {
         double W = fxGrafari.getWidth();
         double H = fxGrafari.getHeight();
 
-        // Use the stored direction from the variable
-        if (stefna == 90) {
-            fxGrafari.setY(Y - H);
-        } else if (stefna == 180) {
-            fxGrafari.setX(X - W);
-        } else if (stefna == 270) {
-            fxGrafari.setY(Y + H);
-        } else if (stefna == 360) {
-            fxGrafari.setX(X + W);
+        if(Igangi) {
+            if (stefna == 90) {
+                fxGrafari.setY(Y - H);
+            } else if (stefna == 180) {
+                fxGrafari.setX(X - W);
+            } else if (stefna == 270) {
+                fxGrafari.setY(Y + H);
+            } else if (stefna == 360) {
+                fxGrafari.setX(X + W);
+            }
         }
+    }
+
+    public void hefjaLeik() {
+        Igangi= true;
+
+    }
+
+    public void raesaKlukku() {
     }
 }
