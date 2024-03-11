@@ -30,7 +30,7 @@ public class GoldController {
     @FXML
     private Rectangle fxGrafari;
 
-    Klukka klukka;
+    Klukka klukka =new Klukka(60);
     Leikur leikur;
 
 
@@ -60,7 +60,7 @@ public class GoldController {
             System.err.println("menuController is null");
         }
         //fxStig.textProperty().bind(leikur.stiginProperty().asString());
-        //fxTimiEftir.textProperty().bind(klukka.timiProperty());
+        fxTimiEftir.textProperty().bind(klukka.timiProperty().asString());
     }
 
     public void setStefna(int upp) {
@@ -119,5 +119,7 @@ public class GoldController {
     }
 
     public void raesaKlukku() {
+        System.out.println("Initial Time: " + klukka.getTimi());
+        klukka.tic();
     }
 }
