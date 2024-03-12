@@ -1,6 +1,18 @@
 .grafari{
-    -fx-fill: blue;
+    -fx-fill: RED;
+    -fx-stroke: BLACK;
+    -fx-stroke-type: INSIDE;
+    -fx-arc-width: 5.0;
+    -fx-arc-height: 5.0;
 }
+
 .leikbordPane {
     -fx-background-color: saddlebrown;
+}
+.gull{
+    -fx-fill: GOLD;
+    -fx-stroke: BLACK;
+    -fx-stroke-type: INSIDE;
+    -fx-arc-width: 5.0;
+    -fx-arc-height: 5.0;
 }
