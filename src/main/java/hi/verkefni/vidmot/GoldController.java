@@ -33,7 +33,7 @@ public class GoldController {
     @FXML
     private Rectangle fxGrafari;
 
-    Klukka klukka = new Klukka(10);
+    Klukka klukka = new Klukka(60);
     Leikur leikur;
 
     private static final int EASY_TIMER = 60;
