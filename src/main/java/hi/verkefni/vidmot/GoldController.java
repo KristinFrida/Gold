@@ -34,9 +34,9 @@ public class GoldController {
     Klukka klukka = new Klukka(10);
     Leikur leikur;
 
-    private static final int EASY_TIMER = 10;
-    private static final int MEDIUM_TIMER = 15;
-    private static final int HARD_TIMER = 20;
+    private static final int EASY_TIMER = 60;
+    private static final int MEDIUM_TIMER = 45;
+    private static final int HARD_TIMER = 30;
 
     private static MenuController menuController = new MenuController();
 
