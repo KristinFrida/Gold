@@ -6,16 +6,15 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Gull extends Rectangle {
-    private static final Random random =new Random();
-    public Gull(Leikbord b) {
-        lesa();
-        setX(random.nextInt((int) (b.getWidth() - getWidth())));
-        setY(random.nextInt((int)( b.getHeight() - getHeight())));
-        b.getChildren().add(this);
+    private static final String FXML_SKRA = "gull-view.fxml";
+    private static final int OFFSET = 10; // Set your desired offset value
+
+    public Gull() {         // kallar á smið yfirklasans (hér EiturSnakur)
+        lesa(FXML_SKRA);
     }
 
-    public void lesa() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gull-view.fxml"));
+    protected void lesa(String fxmlSkra) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlSkra));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -24,7 +23,13 @@ public class Gull extends Rectangle {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
 
+    private static final Random random = new Random();
+
+    public void randomStad(Leikbord b) {
+        setX(random.nextInt((int) (b.getWidth() - getWidth())));
+        setY(random.nextInt((int) (b.getHeight() - getHeight())));
+        b.getChildren().add(this);
     }
 }
-

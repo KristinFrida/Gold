@@ -33,6 +33,9 @@ public class GoldController {
     @FXML
     private Rectangle fxGrafari;
 
+    @FXML
+    private Rectangle fxGull;
+
     Klukka klukka = new Klukka(60);
     Leikur leikur;
 
@@ -132,6 +135,11 @@ public class GoldController {
                 fxGrafari.setX(X + W);
             }
         }
+    }
+
+    private void randomStad(){
+        double W = fxGull.getWidth();
+        double H = fxGull.getHeight();
     }
 
     public void hefjaLeik() {

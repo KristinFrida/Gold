@@ -1,14 +1,10 @@
 package hi.verkefni.vidmot;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 
 public class MenuController {
-    @FXML
-    private MenuItem umForritidMenuItem;
     private static GoldController goldController = new GoldController();
 
     public static GoldController getGoldController() {
