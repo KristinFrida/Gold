@@ -28,10 +28,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Hjálp">
             <items>
-                <MenuItem mnemonicParsing="false">
-                    <graphic>
-                        <DialogPane />
-                    </graphic>
+                <MenuItem mnemonicParsing="false" text="Um forritið" onAction="#onUmForritid">
                 </MenuItem>
             </items>
         </Menu>

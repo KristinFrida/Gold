@@ -1,9 +1,14 @@
 package hi.verkefni.vidmot;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 
 public class MenuController {
+    @FXML
+    private MenuItem umForritidMenuItem;
     private static GoldController goldController = new GoldController();
 
     public static GoldController getGoldController() {
@@ -33,6 +38,21 @@ public class MenuController {
     public void onHaettaLeik(ActionEvent actionEvent) {
         goldController.onHaetta();
     }
+
+    public void onUmForritid(ActionEvent actionEvent) {
+        showAboutDialog();
+    }
+    private void showAboutDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Um Forritið");
+        alert.setHeaderText(null);
+        alert.setContentText("Forritið er samansett af grafara sem á að grafa eftir gulli, fyrir neðan leikborðið " +
+                "birtast stigin og hve mikill tími er eftir. Einnig getur þú stilt erfiðleikastigið hér að ofan og þá breytist " +
+                "hversu mörg gull eru í boði en einnig hversu mikill tími þú færð");
+        alert.getDialogPane().setPrefSize(400, 150);
+        alert.showAndWait();
+    }
+
 
 
 }

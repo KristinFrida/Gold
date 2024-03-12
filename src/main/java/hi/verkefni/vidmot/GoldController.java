@@ -3,6 +3,8 @@ package hi.verkefni.vidmot;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -153,6 +155,27 @@ public class GoldController {
         Igangi=false;
         klukka.setTimi(0);
         klukka.stop();
+        showConfirmationDialog();
+    }
+
+    private void showConfirmationDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("LEIKUR BÚINN");
+        alert.setHeaderText(null);
+        alert.setContentText("LEIKURINN ER BÚINN");
+
+        // Customize button types
+        ButtonType yesButton = new ButtonType("OK");
+
+        alert.getButtonTypes().setAll(yesButton);
+
+        // Show and wait for user response
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == yesButton) {
+                // If user confirms, exit the application
+                System.exit(0);
+            }
+        });
     }
 }
 
