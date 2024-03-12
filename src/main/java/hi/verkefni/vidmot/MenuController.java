@@ -13,10 +13,13 @@ public class MenuController {
         return goldController;
     }
 
-    public void onErfidleikastig(ActionEvent actionEvent){
-        goldController.setDifficultyLevel
-                (Integer.parseInt(((RadioMenuItem)actionEvent.getSource()).getId()));
+    public void onErfidleikastig(ActionEvent event) {
+        RadioMenuItem selectedMenuItem = (RadioMenuItem) event.getSource();
+        int difficultyLevel = Integer.parseInt(selectedMenuItem.getId());
+
+        goldController.setDifficultyLevel(difficultyLevel);
     }
+
 
     public void setController(GoldController goldController) {
         this.goldController = goldController;

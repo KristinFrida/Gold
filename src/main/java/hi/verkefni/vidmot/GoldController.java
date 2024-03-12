@@ -34,6 +34,9 @@ public class GoldController {
     Klukka klukka = new Klukka(10);
     Leikur leikur;
 
+    private static final int EASY_TIMER = 10;
+    private static final int MEDIUM_TIMER = 15;
+    private static final int HARD_TIMER = 20;
 
     private static MenuController menuController = new MenuController();
 
@@ -71,6 +74,21 @@ public class GoldController {
 
     public void setDifficultyLevel(int difficultyLevel) {
         System.out.println("Stilla erfiðleikastigið: " + difficultyLevel);
+
+        switch (difficultyLevel) {
+            case 1: // Easy
+                klukka = new Klukka(EASY_TIMER);
+                break;
+            case 2: // Medium
+                klukka = new Klukka(MEDIUM_TIMER);
+                break;
+            case 3: // Hard
+                klukka = new Klukka(HARD_TIMER);
+                break;
+            default:
+                System.err.println("Invalid difficulty level");
+        }
+        fxTimiEftir.textProperty().bind(klukka.timiProperty().asString());
     }
 
     private void orvatakkar(GoldController sc, Scene scene) {
