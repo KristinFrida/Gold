@@ -1,5 +1,6 @@
 package hi.verkefni.vidmot;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -121,10 +122,13 @@ public class GoldController {
     public void raesaKlukku() {
         System.out.println("Initial Time: " + klukka.getTimi());
         klukka.tic();
-        if (klukka.getTimi() == 0) {
-            Igangi = false;
-            System.out.println("Time is up. Game over!");
-        }
+        // Add a listener to the timi property to check when it becomes 0
+        klukka.timiProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+            if (newValue.intValue() == 0) {
+                Igangi = false;
+                System.out.println("Tími búinn, leikurinn er búinn");
+            }
+        });
     }
 
     public void onHaetta(){

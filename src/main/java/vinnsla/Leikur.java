@@ -27,7 +27,7 @@ public class Leikur {
      *
      * @return stigataflan
      */
-    public ObservableList<Integer> getStigin() {
+    public ObservableList<Integer> getStig() {
         return stigatafla;
     }
 }
