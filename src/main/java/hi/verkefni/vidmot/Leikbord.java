@@ -13,7 +13,7 @@ public class Leikbord extends Pane {
     private static final Random random = new Random();
     private final ObservableList<Grafari> grafariList = FXCollections.observableArrayList();
     private final ObservableList<Gull> gullList = FXCollections.observableArrayList();
-    private Grafari grafari;
+    private Grafari fxGrafari;
     private GoldController goldController;
 
     // Constructor
@@ -30,20 +30,20 @@ public class Leikbord extends Pane {
 
     // Public methods
     public Grafari nyrGrafari() {
-        if (grafari != null)
-            getChildren().remove(grafari);
-        grafari = new Grafari();
-        getChildren().add(grafari);
-        return grafari;
+        if (fxGrafari != null)
+            getChildren().remove(fxGrafari);
+        fxGrafari = new Grafari();
+        getChildren().add(fxGrafari);
+        return fxGrafari;
     }
 
     public void nyrLeikur(int fjoldiMatur) {
         hreinsaBord();
-        grafari = nyrGrafari();
+        fxGrafari = nyrGrafari();
     }
 
     public void afram() {
-        grafari.afram();
+        fxGrafari.afram();
     }
 
 
