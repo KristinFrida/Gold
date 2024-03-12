@@ -133,6 +133,7 @@ public class GoldController {
 
     public void onHaetta(){
         Igangi=false;
+        klukka.setTimi(0);
         klukka.stop();
     }
 }
