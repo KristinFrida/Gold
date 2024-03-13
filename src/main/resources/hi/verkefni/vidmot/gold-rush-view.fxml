@@ -10,8 +10,8 @@
    <fx:include fx:id="menuStyring" source="menu-view.fxml" />
    <Leikbord fx:id="fxLeikbord">
       <children>
-         <Grafari fx:id="fxGrafari"/>
          <Gull fx:id="fxGull"/>
+         <Grafari fx:id="fxGrafari"/>
       </children>
    </Leikbord>
    <Label fx:id="fxStig" layoutX="14.0" layoutY="450.0" prefWidth="67.0" prefHeight="17.0" text="Stigin:" />
