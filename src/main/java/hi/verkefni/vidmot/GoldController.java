@@ -191,29 +191,28 @@ public class GoldController {
         });
     }
     private void gullTimer() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
-            if (iGangi) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1800), event -> {
+            if (Igangi) {
                 virkjaGull();
             }
         }));
 
-
         timeline.setCycleCount(Timeline.INDEFINITE);
-
         timeline.play();
-
     }
+
 
     private static final Random random = new Random();
 
     private void virkjaGull() {
-        for (int i = 0; i < 10; i++) { // Generate 10 gold items for example
-            Gull gull = new Gull();
-            randomStad(gull); // Pass the Gull object to set its random position
-            fxLeikbord.getChildren().add(gull); // Add gold item to the game board
-            gullListi.add(gull); // Add gold item to the list
-        }
+        int numberOfGoldItems = 2;  // Adjust the number as needed
 
+        for (int i = 0; i < numberOfGoldItems; i++) {
+            Gull gull = new Gull();
+            randomStad(gull);
+            fxLeikbord.getChildren().add(gull);
+            gullListi.add(gull);
+        }
         // Listener to ensure newly added Gull objects are displayed on the game board
         gullListi.addListener((ListChangeListener<Gull>) change -> {
             while (change.next()) {
@@ -238,8 +237,8 @@ public class GoldController {
         double randomX = random.nextDouble() * (boardWidth - goldWidth);
         double randomY = random.nextDouble() * (boardHeight - goldHeight);
 
-        gull.setX(randomX);
-        gull.setY(randomY);
+        gull.setLayoutX(randomX);
+        gull.setLayoutY(randomY);
     }
 
     private int score = 0; // Add a member variable to keep track of the score
