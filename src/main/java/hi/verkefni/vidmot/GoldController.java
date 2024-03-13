@@ -112,15 +112,7 @@ public class GoldController {
     public void stefna(GoldController sc, Scene scene) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
-                    // Print the KeyCode to verify key events
-                    System.out.println("KeyCode: " + event.getCode());
-
-                    // Update the direction using the variable
                     sc.setStefna(map.get(event.getCode()).getGradur());
-
-                    // Print the direction to verify the update
-                    System.out.println("Direction: " + sc.stefna);
-
                     afram();
                     grafaGull();
                 });
