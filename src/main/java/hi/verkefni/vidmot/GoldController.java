@@ -62,13 +62,6 @@ public class GoldController {
     // Variable to store the direction
     private int stefna;
 
-    public static GoldController getInstance() {
-        if (instance == null) {
-            instance = new GoldController();
-        }
-        return instance;
-    }
-
     public void initialize() {
         leikur = new Leikur();
         //fxLeikbord.setLeikur(leikur);
@@ -135,19 +128,21 @@ public class GoldController {
         double Y = fxGrafari.getY();
         double W = fxGrafari.getWidth();
         double H = fxGrafari.getHeight();
+        double boardWidth = fxLeikbord.getWidth();
 
         if (Igangi) {
-            if (stefna == 90) {
+            if (stefna == 90 && Y > 0) { // UP
                 fxGrafari.setY(Y - H);
-            } else if (stefna == 180) {
+            } else if (stefna == 180 && X > 0) { // LEFT
                 fxGrafari.setX(X - W);
-            } else if (stefna == 270) {
+            } else if (stefna == 270 && Y + H < fxLeikbord.getHeight()) { // DOWN
                 fxGrafari.setY(Y + H);
-            } else if (stefna == 360) {
+            } else if (stefna == 360 && X + W < boardWidth) { // RIGHT
                 fxGrafari.setX(X + W);
             }
         }
     }
+
 
     private void randomStad(){
         double W = fxGull.getWidth();
@@ -156,7 +151,7 @@ public class GoldController {
 
     public void hefjaLeik() {
         Igangi = true;
-
+        gullTimer();
     }
 
     public void raesaKlukku() {
@@ -214,9 +209,12 @@ public class GoldController {
     private static final Random random = new Random();
 
     private void virkjaGull() {
-        Gull gull = new Gull();
-        randomStad(gull);
-        gullListi.add(gull);
+        for (int i = 0; i < 10; i++) { // Generate 10 gold items for example
+            Gull gull = new Gull();
+            randomStad(gull); // Set random position for the gold item
+            fxLeikbord.getChildren().add(gull); // Add gold item to the game board
+            gullListi.add(gull); // Add gold item to the list
+        }
 
         gullListi.addListener((ListChangeListener<Gull>) change -> {
             while (change.next()) {
