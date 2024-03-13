@@ -46,7 +46,6 @@ public class GoldController {
 
     private ObservableList<Gull> gullListi = FXCollections.observableArrayList();
 
-
     Klukka klukka = new Klukka(60);
     Leikur leikur;
 
@@ -58,10 +57,11 @@ public class GoldController {
 
     boolean Igangi = false;
 
-
-    // Variable to store the direction
     private int stefna;
 
+    /**
+     * Upphafstillir leikinn
+     */
     public void initialize() {
         leikur = new Leikur();
         //fxLeikbord.setLeikur(leikur);
@@ -76,10 +76,16 @@ public class GoldController {
         fxTimiEftir.textProperty().bind(klukka.timiProperty().asString());
     }
 
+
     public void setStefna(int upp) {
         // Assign the direction to the variable
         this.stefna = upp;
     }
+
+    /**
+     * Hér erum við að stilla erfiðleikastigið
+     * @param difficultyLevel
+     */
 
     public void setDifficultyLevel(int difficultyLevel) {
         System.out.println("Stilla erfiðleikastigið: " + difficultyLevel);
@@ -109,6 +115,12 @@ public class GoldController {
         stefna(sc, scene);
     }
 
+    /**
+     * Hérna eru síur fyrir inntak frá lyklaborði til þess að stjórna hreyfingum
+     * @param sc Goldcontoller
+     * @param scene
+     */
+
     public void stefna(GoldController sc, Scene scene) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
@@ -117,6 +129,12 @@ public class GoldController {
                     grafaGull();
                 });
     }
+
+    /**
+     * Sækir inntakið frá lyklaborðinu
+     * @param sc
+     * @param scene
+     */
 
     public void getOrvatakkar(GoldController sc, Scene scene) {
         orvatakkar(sc, scene);
@@ -147,6 +165,9 @@ public class GoldController {
         double H = fxGull.getHeight();
     }
 
+    /**
+     * Til þess að hefja leikinn
+     */
     public void hefjaLeik() {
         Igangi = true;
         gullTimer();
@@ -164,12 +185,20 @@ public class GoldController {
         });
     }
 
+    /**
+     * Hætta leikinn
+     */
+
     public void onHaetta(){
         Igangi=false;
         klukka.setTimi(0);
         klukka.stop();
         showConfirmationDialog();
     }
+
+    /**
+     * Viðvörun þegar að leikurinn er búinn
+     */
 
     private void showConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -213,7 +242,6 @@ public class GoldController {
             fxLeikbord.getChildren().add(gull);
             gullListi.add(gull);
         }
-        // Listener to ensure newly added Gull objects are displayed on the game board
         gullListi.addListener((ListChangeListener<Gull>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -240,7 +268,7 @@ public class GoldController {
 
 
 
-    private int score = 0; // Add a member variable to keep track of the score
+    private int score = 0;
 
     private void grafaGull() {
         var iterator = gullListi.iterator();
@@ -250,7 +278,6 @@ public class GoldController {
                 iterator.remove();
                 gull.setVisible(false);
 
-                // Increment the score and update the label
                 score++;
                 fxStig.setText("Stig : " + score);
             }

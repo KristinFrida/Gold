@@ -51,6 +51,9 @@ public class Leikbord extends Pane {
         hreinsaGrafara();
     }
 
+    /**
+     * Hér erum við að hreinsa grafarann af borðinu
+     */
     // Private methods
     private void hreinsaGrafara() {
         for (Grafari g : grafariList) {

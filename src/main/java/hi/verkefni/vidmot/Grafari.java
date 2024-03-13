@@ -7,8 +7,11 @@ import java.io.IOException;
 public class Grafari extends Rectangle {
 
     private static final String FXML_SKRA = "grafari-view.fxml";
-    private static final int OFFSET = 10; // Set your desired offset value
+    private static final int OFFSET = 10;
 
+    /**
+     * Lesa inn FXML skránna grafari
+     */
     public Grafari() {         // kallar á smið yfirklasans (hér EiturSnakur)
         lesa(FXML_SKRA);
     }
@@ -29,15 +32,5 @@ public class Grafari extends Rectangle {
         Leikbord p = (Leikbord) this.getParent();
         setX((int) (getX() + p.getWidth() + Math.cos(Math.toRadians(getRotate())) * OFFSET) % (int) p.getWidth());
         setY((int) (getY() + p.getHeight() - Math.sin(Math.toRadians(getRotate())) * OFFSET) % (int) p.getHeight());
-    }
-
-    /**
-     * Athugar hvort Grafari etur (skarast við) gull.
-     *
-     * @param g gull
-     * @return satt ef grafari étur gull annars false
-     */
-    public boolean erEtur(Gull g) {
-        return getBoundsInParent().intersects(g.getBoundsInParent());
     }
 }

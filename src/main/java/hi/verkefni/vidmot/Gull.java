@@ -7,8 +7,11 @@ import java.util.Random;
 
 public class Gull extends Rectangle {
     private static final String FXML_SKRA = "gull-view.fxml";
-    private static final int OFFSET = 10; // Set your desired offset value
+    private static final int OFFSET = 10;
 
+    /**
+     * Hér er verið að lesa inn gullið
+     */
     public Gull() {         // kallar á smið yfirklasans (hér EiturSnakur)
         lesa(FXML_SKRA);
     }
