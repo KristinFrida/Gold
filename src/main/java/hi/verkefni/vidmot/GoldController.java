@@ -228,18 +228,17 @@ public class GoldController {
     }
 
     private void randomStad(Gull gull) {
-        double boardWidth = fxLeikbord.getWidth();
-        double boardHeight = fxLeikbord.getHeight();
-        double goldWidth = gull.getWidth();
-        double goldHeight = gull.getHeight();
+        double leikbordWidth = fxLeikbord.getWidth()-100;
+        double leikbordHeight = fxLeikbord.getHeight()- 100;
 
-        Random random = new Random();
-        double randomX = random.nextDouble() * (boardWidth - goldWidth);
-        double randomY = random.nextDouble() * (boardHeight - goldHeight);
+        double randomX = (Math.random() * (leikbordWidth));
+        double randomY = (Math.random() * (leikbordHeight));
 
         gull.setLayoutX(randomX);
         gull.setLayoutY(randomY);
     }
+
+
 
     private int score = 0; // Add a member variable to keep track of the score
 
