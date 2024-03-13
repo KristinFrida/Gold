@@ -109,11 +109,18 @@ public class GoldController {
         stefna(sc, scene);
     }
 
-    private void stefna(GoldController sc, Scene scene) {
+    public void stefna(GoldController sc, Scene scene) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
+                    // Print the KeyCode to verify key events
+                    System.out.println("KeyCode: " + event.getCode());
+
                     // Update the direction using the variable
                     sc.setStefna(map.get(event.getCode()).getGradur());
+
+                    // Print the direction to verify the update
+                    System.out.println("Direction: " + sc.stefna);
+
                     afram();
                     grafaGull();
                 });
@@ -128,7 +135,6 @@ public class GoldController {
         double Y = fxGrafari.getY();
         double W = fxGrafari.getWidth();
         double H = fxGrafari.getHeight();
-        double boardWidth = fxLeikbord.getWidth();
 
         if (Igangi) {
             if (stefna == 90 && Y > 0) { // UP
@@ -137,7 +143,7 @@ public class GoldController {
                 fxGrafari.setX(X - W);
             } else if (stefna == 270 && Y + H < fxLeikbord.getHeight()) { // DOWN
                 fxGrafari.setY(Y + H);
-            } else if (stefna == 360 && X + W < boardWidth) { // RIGHT
+            } else if (stefna == 360 && X + W < fxLeikbord.getWidth()) { // RIGHT
                 fxGrafari.setX(X + W);
             }
         }
@@ -211,11 +217,12 @@ public class GoldController {
     private void virkjaGull() {
         for (int i = 0; i < 10; i++) { // Generate 10 gold items for example
             Gull gull = new Gull();
-            randomStad(gull); // Set random position for the gold item
+            randomStad(gull); // Pass the Gull object to set its random position
             fxLeikbord.getChildren().add(gull); // Add gold item to the game board
             gullListi.add(gull); // Add gold item to the list
         }
 
+        // Listener to ensure newly added Gull objects are displayed on the game board
         gullListi.addListener((ListChangeListener<Gull>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
