@@ -25,11 +25,4 @@ public class Gull extends Rectangle {
         }
     }
 
-    private static final Random random = new Random();
-
-    public void randomStad(Leikbord b) {
-        setX(random.nextInt((int) (b.getWidth() - getWidth())));
-        setY(random.nextInt((int) (b.getHeight() - getHeight())));
-        b.getChildren().add(this);
-    }
 }

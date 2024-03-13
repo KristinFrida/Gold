@@ -1,6 +1,11 @@
 package hi.verkefni.vidmot;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -10,12 +15,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import vinnsla.Klukka;
 import vinnsla.Leikur;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class GoldController {
+    private boolean iGangi = false;
 
     private static GoldController instance;
 
@@ -35,6 +43,9 @@ public class GoldController {
 
     @FXML
     private Rectangle fxGull;
+
+    private ObservableList<Gull> gullListi = FXCollections.observableArrayList();
+
 
     Klukka klukka = new Klukka(60);
     Leikur leikur;
@@ -111,6 +122,7 @@ public class GoldController {
                     // Update the direction using the variable
                     sc.setStefna(map.get(event.getCode()).getGradur());
                     afram();
+                    grafaGull();
                 });
     }
 
@@ -184,6 +196,70 @@ public class GoldController {
                 System.exit(0);
             }
         });
+    }
+    private void gullTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+            if (iGangi) {
+                virkjaGull();
+            }
+        }));
+
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        timeline.play();
+
+    }
+
+    private static final Random random = new Random();
+
+    private void virkjaGull() {
+        Gull gull = new Gull();
+        randomStad(gull);
+        gullListi.add(gull);
+
+        gullListi.addListener((ListChangeListener<Gull>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Gull gull1 : change.getAddedSubList()) {
+                        if (!fxLeikbord.getChildren().contains(gull1)) {
+                            fxLeikbord.getChildren().add(gull1);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void randomStad(Gull gull) {
+        double boardWidth = fxLeikbord.getWidth();
+        double boardHeight = fxLeikbord.getHeight();
+        double goldWidth = gull.getWidth();
+        double goldHeight = gull.getHeight();
+
+        Random random = new Random();
+        double randomX = random.nextDouble() * (boardWidth - goldWidth);
+        double randomY = random.nextDouble() * (boardHeight - goldHeight);
+
+        gull.setX(randomX);
+        gull.setY(randomY);
+    }
+
+    private int score = 0; // Add a member variable to keep track of the score
+
+    private void grafaGull() {
+        var iterator = gullListi.iterator();
+        while (iterator.hasNext()) {
+            Gull gull = iterator.next();
+            if (gull.getBoundsInParent().intersects(fxGrafari.getBoundsInParent())) {
+                iterator.remove();
+                gull.setVisible(false);
+
+                // Increment the score and update the label
+                score++;
+                fxStig.setText("Stig : " + score);
+            }
+        }
     }
 }
 

@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import hi.verkefni.vidmot.Leikbord?>
-<?import javafx.scene.shape.Rectangle?>
-
 <?import hi.verkefni.vidmot.Grafari?>
 <?import hi.verkefni.vidmot.Gull?>
 <Pane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hi.verkefni.vidmot.GoldController"
